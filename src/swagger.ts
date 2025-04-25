@@ -1,6 +1,7 @@
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Express } from "express";
+import { AuthController } from "./controllers/auth.controller";
 
 
 const swaggerOptions = {
@@ -17,7 +18,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ["./routers/*.ts"], // Path ke file controller
+  apis: ["./controllers/*.ts"], // Path ke file controller
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
