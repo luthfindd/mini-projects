@@ -14,7 +14,6 @@ import { EventRouter } from './routers/event.router';
 import { join } from 'path';
 import { TransactionRouter } from './routers/transaction.router';
 import { CouponRouter } from './routers/coupon.router';
-import { setupSwagger } from "./swagger";
 
 export default class App {
   readonly app: Express;
@@ -31,7 +30,6 @@ export default class App {
     this.app.use(json());
     this.app.use(urlencoded({ extended: true }));
     this.app.use('/api/assets', static_(join(__dirname, '../public')));
-    setupSwagger(this.app);
   }
 
   private handleError(): void {

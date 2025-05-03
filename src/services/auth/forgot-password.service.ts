@@ -4,6 +4,7 @@ import { sign } from 'jsonwebtoken';
 import prisma from '../../prisma/prisma';
 import { User } from '@prisma/client';
 import { transporter } from '../../libs/nodemailer';
+import e from 'cors';
 
 export const forgotPasswordService = async (body: Pick<User, 'email'>) => {
   try {
@@ -14,6 +15,7 @@ export const forgotPasswordService = async (body: Pick<User, 'email'>) => {
     if (!user) {
       throw new Error('invalid email address');
     }
+    console.log(email, 'email');
 
     const token = sign({ id: user.id }, appConfig.jwtSecretKey, {
       expiresIn: '30m',

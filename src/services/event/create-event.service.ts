@@ -33,7 +33,7 @@ export const createEventService = async (
       voucherExpDate,
       voucherLimit,
     } = body;
-
+    
     const existingTitle = await prisma.event.findFirst({
       where: { title },
     });
@@ -59,12 +59,12 @@ export const createEventService = async (
         category,
         description,
         location,
-        start_date,
+        start_date: new Date(start_date),
         time,
-        end_date,
+        end_date: end_date ? new Date(end_date) : null,
         title,
         address,
-        isAvailable,
+        isAvailable: Boolean(isAvailable),
       },
     });
 
@@ -75,7 +75,7 @@ export const createEventService = async (
         data: {
           code: voucherCode,
           discountAmount: Number(voucherAmount),
-          expirationDate: voucherExpDate,
+          expirationDate: new Date(voucherExpDate),
           limit: Number(voucherLimit),
           eventId: Number(createEvent.id),
           userId: Number(userId),

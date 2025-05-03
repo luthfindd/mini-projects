@@ -27,7 +27,7 @@ export const claimVoucherService = async (
     }
 
     if (voucher?.limit === 0) {
-      throw new Error('voucher abis bos');
+      throw new Error('voucher is out of stock');
     }
 
     const update = await prisma.voucher.update({

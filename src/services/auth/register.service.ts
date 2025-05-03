@@ -3,12 +3,11 @@ import { User } from '@prisma/client';
 
 import { addMonths } from 'date-fns';
 import { hashPassword } from '../../libs/bcrypt';
-import { unknown } from 'zod';
 
 const prisma = new PrismaClient();
 export const registerService = async (body: Omit<User, 'id'>) => {
     try {
-      const { email, password, referralCode } = body;
+      const { email, password, referralCode, fullName } = body;
   
       const existingUser = await prisma.user.findFirst({
         where: { email },
@@ -26,6 +25,7 @@ export const registerService = async (body: Omit<User, 'id'>) => {
       const newUser = await prisma.user.create({
         data: {
           ...body,
+          fullName: fullName,
           password: hashedPassword,
           referralCode: GeneratereferralCode,
           point: 0,
@@ -75,11 +75,11 @@ export const registerService = async (body: Omit<User, 'id'>) => {
           },
         });
         console.log("step 5")
-        return {
-          message: 'Register success !',
-          data: newUser,
-        };
       }
+      return {
+        message: 'Register success !',
+        data: newUser,
+      };
     } catch (error) {
       console.log(error)
       throw error;

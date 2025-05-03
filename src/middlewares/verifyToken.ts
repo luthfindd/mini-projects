@@ -18,7 +18,6 @@ declare global {
 
 export  const verifyToken = async  ( req: Request, res: Response,next: NextFunction) :Promise <any> => {
   const token = req.headers.authorization?.split(' ')[1];
-
   if (!token) {
     return res.status(401).send({
       message: 'token is missing',

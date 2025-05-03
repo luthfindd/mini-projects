@@ -5,3 +5,9 @@ export interface User {
   referral_code: string;
   point: number;
 }
+
+export interface Register {
+  fullName: string;
+  email: string;
+  password: string;
+}

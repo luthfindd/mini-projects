@@ -15,6 +15,7 @@ export const updateEventService = async (
     const event = await prisma.event.findFirst({
       where: { id },
     });
+    console.log(id, 'id');
 
     if (!event) {
       throw new Error('Blog not found');
@@ -27,6 +28,7 @@ export const updateEventService = async (
         throw new Error('Title already in use');
       }
     }
+    console.log(event, 'event');
 
     if (file) {
       body.thumbnail_url = `/images/${file.filename}`;

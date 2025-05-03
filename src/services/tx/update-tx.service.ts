@@ -21,8 +21,10 @@ export const updateTransactionService = async (
 
     if (file) {
       body.paymentProof = `/txProof/${file.filename}`;
-      const imagePath = resolve(__dirname, '../../../public' + tx.paymentProof);
-
+      console.log(file)
+      const imagePath = resolve(__dirname, '../../../public', tx.paymentProof);
+      console.log(tx)
+      console.log(imagePath)
       if (fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
       }
