@@ -32,7 +32,6 @@ export const registerService = async (body: Omit<User, 'id'>) => {
           pointExpiredDate: new Date(),
         },
       });
-      console.log("step 1")
   
       const userCoupon = String(
         newUser.fullName.substring(0, 3) + Math.ceil(Math.random() * 1000),
@@ -42,7 +41,6 @@ export const registerService = async (body: Omit<User, 'id'>) => {
         const referral = await prisma.user.findFirst({
           where: { referralCode: referralCode },
         });
-        console.log("step 2")
         if (!referral) {
           console.log("error")
         }
@@ -56,7 +54,6 @@ export const registerService = async (body: Omit<User, 'id'>) => {
             pointExpiredDate: expiredDate,
           },
         });
-        console.log("step 3")
   
         await prisma.user.update({
           where: { id: newUser.id },
@@ -64,7 +61,6 @@ export const registerService = async (body: Omit<User, 'id'>) => {
             userReward: true,
           },
         });
-        console.log("step 4")
         await prisma.coupon.create({
           data: {
             isUse: false,
@@ -74,7 +70,6 @@ export const registerService = async (body: Omit<User, 'id'>) => {
             userId: newUser.id,
           },
         });
-        console.log("step 5")
       }
       return {
         message: 'Register success !',
