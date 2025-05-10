@@ -26,7 +26,7 @@ export default class App {
   }
 
   private configure(): void {
-    this.app.use(cors());
+    this.app.use(cors({ origin: '*' }));
     this.app.use(json());
     this.app.use(urlencoded({ extended: true }));
     this.app.use('/api/assets', static_(join(__dirname, '../public')));
